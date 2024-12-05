@@ -1,27 +1,27 @@
 # Java Problems Repository
 
-This repository contains solutions to various Java programming problems. 🖥️
+This repository contains solutions to various Java programming problems.
 
 ---
 
-## 📝 Contents
-- Problems cover a range of topics:
+## Contents
+- Topics covered include:
   - Data Structures and Algorithms
   - Object-Oriented Programming
-  - Other core Java concepts
-- Some solutions are inspired by or directly adapted from platforms like:
-  - **Code360**
-  - **HackerRank**
-  - **LeetCode**
+  - Core Java concepts
+- Some solutions are inspired by or directly adapted from platforms such as:
+  - Code360
+  - HackerRank
+  - LeetCode
 
 ---
 
-## 🚀 Requirements
-- **Java 16 or above** is required to run all solutions in this repository.
+## Requirements
+- Java 16 or above is required to run all solutions in this repository.
 
 ---
 
-## 🔧 Usage
-Feel free to explore the code for learning, practice, or reference. Clone the repository using:
+## Usage
+Clone the repository to your local machine using the following command:
 ```bash
 git clone https://github.com/iamkhusro/CodeSource.git
