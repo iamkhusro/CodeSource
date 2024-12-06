@@ -136,6 +136,9 @@ public class Streams {
                 .stream().filter(Objects::nonNull) //loop through each object and consider not null objects
                 .forEach(System.out::println);
 
+        System.out.println("Print sum of elements using reduce: ");
+        System.out.println(numList.stream().reduce(0, (c,e) -> c + e));
+
 
 
         int[] arr = new int[]{1,5,34,87};
