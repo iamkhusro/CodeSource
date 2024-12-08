@@ -154,6 +154,11 @@ public class Streams {
         System.out.println(numList.stream().collect(Collectors.toList()));
         //similarly, we can directly convert to set using toSet() to get unique elements
 
+        System.out.println("Flatten List<List<String>> to a single list: ");
+        List<List<String>> listOfList = List.of(List.of("hello" , "there"), List.of("welcome", "to streams"));
+        List<String> singleList = listOfList.stream().flatMap(Collection::stream).toList();
+        System.out.println(singleList);
+
 
         //suppose for an object Employee, we want to create a Map containing id as key and salary as value
         //Map<Integer,Double> map = employees.stream().collect(Collectors.toMap(Employee::getId, Employee::getSalary));
