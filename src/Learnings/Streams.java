@@ -227,6 +227,8 @@ public class Streams {
         System.out.println(intSummaryStatistics.toString());
         System.out.println(intSummaryStatistics.getAverage());
 
-
+        System.out.println("Use collectors mapping: ");
+        System.out.println(partInt.stream().collect(Collectors.mapping(n -> n * 2, Collectors.toList())));
+        //old way, now we can directly use stream().map(n -> n * 2).toList();
     }
 }
