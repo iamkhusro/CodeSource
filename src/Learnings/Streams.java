@@ -214,7 +214,11 @@ public class Streams {
         }
 
 
+        System.out.println("Partition a list into two having even and odd numbers: ");
+        List<Integer> partInt = List.of(1,6,4,3,77,51);
+        Map<Boolean, List<Integer>> partIntMap = partInt.stream().collect(Collectors.partitioningBy(n -> n % 2== 0));
 
+        System.out.println(partIntMap);
 
 
     }
