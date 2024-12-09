@@ -5,6 +5,80 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+class Employee {
+    public int id;
+    public String name;
+    public double salary;
+    public String department;
+    public String gender;
+    public int age;
+
+    Employee () {
+    }
+
+    public Employee(int id, String name, double salary, String department, String gender, int age) {
+        this.id = id;
+        this.name = name;
+        this.salary = salary;
+        this.department = department;
+        this.gender = gender;
+        this.age = age;
+    }
+
+    public Employee(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public double getSalary() {
+        return salary;
+    }
+
+    public void setSalary(double salary) {
+        this.salary = salary;
+    }
+
+    public String getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(String department) {
+        this.department = department;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+}
+
 public class Streams {
     public static void main(String[] args) {
         List<Integer> numList = Arrays.asList(10,15,8,49,25,98,32,49,15,49);
@@ -233,7 +307,7 @@ public class Streams {
 
 
         System.out.println("Get the lengths of each string in a list: ");
-        List<String> strList1 = List.of("heya", "nice", "to", "meet", "you");
+        List<String> strList1 = List.of("heya", "buddy", "nice", "to", "meet", "you");
         Map<String, Integer> lengthMap = strList1.stream().collect(Collectors.toMap(Function.identity(), String::length));
         System.out.println(lengthMap);
 
@@ -246,5 +320,40 @@ public class Streams {
         System.out.println(size);
 
 
+        System.out.println("\nFind the longest string in a list of strings: ");
+        System.out.println(strList1.stream().max((x,y) -> x.length() - y.length()).orElse(""));
+        //or
+        System.out.println(strList1.stream().max(Comparator.comparing(String::length)).orElse(""));
+        //or
+        System.out.println(strList1.stream().max(Comparator.comparingInt(String::length)).orElse(""));
+
+
+
+        List<Employee> employees = List.of(new Employee("Kunal", 25), new Employee("Vishal", 30), new Employee("Alok", 22));
+        System.out.println("\nCalculate the average age of a list of Employee objects: ");
+        System.out.println(employees.stream().mapToInt(Employee::getAge).average().orElse(0));
+
+
+        System.out.println("\nMerge two sorted lists into a single sorted list: ");
+        List<Integer> l1 = List.of(1,4,8,10,22);
+        List<Integer> l2 = List.of(15,33,80,102,220);
+        System.out.println(Stream.concat(l1.stream(), l2.stream()).sorted().toList());
+
+
+        System.out.println("\nFind the intersection of two lists: ");
+        List<Integer> l3 = List.of(1,4,15,8,10,22,44);
+        List<Integer> l4 = List.of(15,33,44,80,102,220);
+        System.out.println(l3.stream().filter(l4::contains).toList());
+
+        System.out.println("\nFind the kth smallest element: ");
+        List<Integer> l5 = List.of(100,140,1,4,15,8,10,22,44);
+        int k = 5;
+        System.out.println(l5.stream().sorted().skip(k - 1).findFirst().orElse(-1));
+
+        System.out.println("\nGiven a list of strings, find the frequency of each word: ");
+        List<String> words = Arrays.asList("apple", "banana", "apple", "cherry", "banana", "apple");
+        Map<String, Long> freqMap = words.stream().collect(Collectors.groupingBy(Function.identity(), LinkedHashMap::new, Collectors.counting()));
+        //use LinkedHashMap to maintain order, else don't pass anything
+        System.out.println(freqMap);
     }
 }
