@@ -40,6 +40,10 @@ public class Streams {
         System.out.println("Sorted Reverse 2: ");
         numList.stream().sorted((x,y) -> y - x).forEach(System.out::println);
 
+        System.out.println("Sorted Strings Reverse: ");
+        List<String> strList = List.of("hello", "welcome", "to streams");
+        strList.stream().sorted(Collections.reverseOrder()).forEach(System.out::println);
+
         //for objects
         //employees.stream().sorted((e1,e2) -> e1.getId() - e2.getId()))
         //we can use same comparator (e1,e2) -> e1.getId() - e2.getId() for max, min
