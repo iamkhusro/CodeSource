@@ -163,6 +163,9 @@ public class Streams {
         List<String> singleList = listOfList.stream().flatMap(Collection::stream).toList();
         System.out.println(singleList);
 
+        System.out.println("Output the elements Like [hello, there, welcome, to streams]");
+        System.out.println(singleList.stream().collect(Collectors.joining(", ", "[", "]")));
+
 
         //suppose for an object Employee, we want to create a Map containing id as key and salary as value
         //Map<Integer,Double> map = employees.stream().collect(Collectors.toMap(Employee::getId, Employee::getSalary));
@@ -209,6 +212,10 @@ public class Streams {
             secondMaxCount = counts.get(1);
             System.out.println(countMap.entrySet().stream().filter(entry -> entry.getValue().equals(secondMaxCount)).map(entry -> entry.getKey()).findFirst().orElse(null));
         }
+
+
+
+
 
     }
 }
