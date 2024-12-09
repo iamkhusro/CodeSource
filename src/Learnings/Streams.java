@@ -25,9 +25,16 @@ class Employee {
         this.age = age;
     }
 
-    public Employee(String name, int age) {
-        this.name = name;
-        this.age = age;
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", salary=" + salary +
+                ", department='" + department + '\'' +
+                ", gender='" + gender + '\'' +
+                ", age=" + age +
+                '}';
     }
 
     public int getId() {
@@ -81,6 +88,11 @@ class Employee {
 
 public class Streams {
     public static void main(String[] args) {
+        List<Employee> employees = List.of(new Employee(1, "Kunal", 2500.0, "Food", "Male", 25),
+                new Employee(3, "Vishal", 5000.0, "Science", "Male", 30),
+                        new Employee(2, "Alok", 1500.0, "Food", "Male", 20),
+                            new Employee(4, "Jiya", 2500.0, "Political Science", "Female", 32));
+
         List<Integer> numList = Arrays.asList(10,15,8,49,25,98,32,49,15,49);
 
         //we will perform various intermediate and terminal operations to create stream pipelines
@@ -116,11 +128,13 @@ public class Streams {
 
         System.out.println("Sorted Strings Reverse: ");
         List<String> strList = List.of("hello", "welcome", "to streams");
-        strList.stream().sorted(Collections.reverseOrder()).forEach(System.out::println);
+        strList.stream().sorted(Comparator.reverseOrder()).forEach(System.out::println);
 
-        //for objects
-        //employees.stream().sorted((e1,e2) -> e1.getId() - e2.getId()))
+        System.out.println("\nSort employee objects according to ids: ");
+        System.out.println(employees.stream().sorted((emp1,emp2) -> emp1.getId() - emp2.getId()).toList());
         //we can use same comparator (e1,e2) -> e1.getId() - e2.getId() for max, min
+        //or
+        System.out.println(employees.stream().sorted(Comparator.comparingInt(Employee::getId)).toList());
 
 
 
@@ -156,7 +170,7 @@ public class Streams {
         System.out.println("Uses of peek(): ");
         numList.stream().peek(n -> System.out.println("Peek: " + n)).filter(n -> n % 2 == 0).forEach(System.out::println);
 
-        //peek is an intermediate operation and can be used to perform operation or check data one by one in between pipelines without making changes to data and then continue with other operations.
+        //peek is an intermediate operation and can be used to perform operation or debug and check data one by one in between pipelines without making changes to data and then continue with other operations.
         //check outputs to clear
 
 
@@ -241,30 +255,40 @@ public class Streams {
         System.out.println(singleList.stream().collect(Collectors.joining(", ", "[", "]")));
 
 
-        //suppose for an object Employee, we want to create a Map containing id as key and salary as value
-        //Map<Integer,Double> map = employees.stream().collect(Collectors.toMap(Employee::getId, Employee::getSalary));
+        System.out.println("\nFor Employee, create a Map containing id as key and salary as value: ");
+        Map<Integer,Double> salMap = employees.stream().collect(Collectors.toMap(Employee::getId, Employee::getSalary));
+        System.out.println(salMap);
 
-        //average salary department wise
-        //Map<String,Double> map = employees.stream().collect(Collectors.groupingBy(Employee::getDepartment, Collectors.averagingDouble(Employee::getSalary));
+        System.out.println("\nFor Employee, print average salary department wise: ");
+        Map<String, Double> salAvgMap = employees.stream().collect(Collectors.groupingBy(Employee::getDepartment, Collectors.averagingDouble(Employee::getSalary)));
+        System.out.println(salAvgMap);
 
-        //count gender wise
-        //Map<String,Double> map = employees.stream().collect(Collectors.groupingBy(Employee::getGender, Collectors.counting());
-
-
-        //sum of all salary
-        //double salarySum = employees.stream().collect(Collectors.summingDouble(Employee::getSalary));
-
-
-        //summarising on salary
-        //double salarySum = employees.stream().collect(Collectors.summarizingDouble(Employee::getSalary));
-
-        //employee with max or min age
-        //Employee emp = employees.stream().collect(Collectors.maxBy((emp1, emp2) -> exp1.getSalary() - emp2.getSalary())).orElse(null);
-        //Alternate, Employee emp = employees.stream().max((emp1, emp2) -> emp1.getSalary() - emp2.getSalary()).orELse(null);
+        System.out.println("\nFor employee, count gender wise: ");
+        Map<String,Long> genderCount = employees.stream().collect(Collectors.groupingBy(Employee::getGender, Collectors.counting()));
+        System.out.println(genderCount);
 
 
-        //get all department names separated by ,
-        //String departments = employees.stream().map(Employee::getDepartment).collect(Collectors.joining(", "));
+        System.out.println("\nFor Employee, find sum of all salaries: ");
+        double salarySum = employees.stream().mapToDouble(Employee::getSalary).sum();
+        System.out.println(salarySum);
+        //or
+        double salarySum2 = employees.stream().collect(Collectors.summingDouble(Employee::getSalary));
+        System.out.println(salarySum2);
+
+
+        System.out.println("\nFor Employee, summarise salary: ");
+        DoubleSummaryStatistics doubleSummaryStatistics = employees.stream().collect(Collectors.summarizingDouble(Employee::getSalary));
+        System.out.println(doubleSummaryStatistics);
+
+        System.out.println("\nFind employee with max or min age: ");
+        System.out.println(employees.stream().max(Comparator.comparingInt(Employee::getAge)).orElse(null));
+        //or
+        System.out.println(employees.stream().collect(Collectors.maxBy(Comparator.comparingInt(Employee::getAge))).orElse(null));
+
+
+        System.out.println("\nGet all employee department names separated by , :");
+        String dept = employees.stream().map(Employee::getDepartment).distinct().collect(Collectors.joining(", "));
+        System.out.println(dept);
 
         //Convert a List of objects into a Map by considering duplicated keys and store them in sorted order
 //        Map<String, Long> notesRecords = noteLst.stream()
@@ -329,7 +353,6 @@ public class Streams {
 
 
 
-        List<Employee> employees = List.of(new Employee("Kunal", 25), new Employee("Vishal", 30), new Employee("Alok", 22));
         System.out.println("\nCalculate the average age of a list of Employee objects: ");
         System.out.println(employees.stream().mapToInt(Employee::getAge).average().orElse(0));
 
@@ -355,5 +378,8 @@ public class Streams {
         Map<String, Long> freqMap = words.stream().collect(Collectors.groupingBy(Function.identity(), LinkedHashMap::new, Collectors.counting()));
         //use LinkedHashMap to maintain order, else don't pass anything
         System.out.println(freqMap);
+
+        //add teeing()
     }
+
 }
