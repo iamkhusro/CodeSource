@@ -229,6 +229,15 @@ public class Streams {
 
         System.out.println("Use collectors mapping: ");
         System.out.println(partInt.stream().collect(Collectors.mapping(n -> n * 2, Collectors.toList())));
-        //old way, now we can directly use stream().map(n -> n * 2).toList();
+        //we can directly use stream().map(n -> n * 2).toList();
+
+
+        System.out.println("Get the lengths of each string in a list: ");
+        List<String> strList1 = List.of("heya", "nice", "to", "meet", "you");
+        Map<String, Integer> lengthMap = strList1.stream().collect(Collectors.toMap(Function.identity(), String::length));
+        System.out.println(lengthMap);
+
+        System.out.println("Use collectors filtering: ");
+        System.out.println(strList1.stream().collect(Collectors.filtering(n -> n.length() > 3, Collectors.toList())));
     }
 }
