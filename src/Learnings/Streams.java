@@ -221,5 +221,12 @@ public class Streams {
         System.out.println(partIntMap);
 
 
+        System.out.println("Get summary of the list of Integers: ");
+        IntSummaryStatistics intSummaryStatistics = partInt.stream().collect(Collectors.summarizingInt(Integer::intValue));
+
+        System.out.println(intSummaryStatistics.toString());
+        System.out.println(intSummaryStatistics.getAverage());
+
+
     }
 }
