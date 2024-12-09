@@ -215,7 +215,7 @@ public class Streams {
 
 
         System.out.println("Partition a list into two having even and odd numbers: ");
-        List<Integer> partInt = List.of(1,6,4,3,77,51);
+        List<Integer> partInt = List.of(1,6,4,3,77,51,6,1);
         Map<Boolean, List<Integer>> partIntMap = partInt.stream().collect(Collectors.partitioningBy(n -> n % 2== 0));
 
         System.out.println(partIntMap);
@@ -239,5 +239,12 @@ public class Streams {
 
         System.out.println("Use collectors filtering: ");
         System.out.println(strList1.stream().collect(Collectors.filtering(n -> n.length() > 3, Collectors.toList())));
+
+
+        System.out.println("Use of collectingAndThen: ");
+        int size = partInt.stream().collect(Collectors.collectingAndThen(Collectors.toSet(), Set::size));
+        System.out.println(size);
+
+
     }
 }
