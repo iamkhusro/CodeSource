@@ -3,6 +3,7 @@ package Learnings;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 class Employee {
@@ -385,7 +386,38 @@ public class Streams {
         //use LinkedHashMap to maintain order, else don't pass anything
         System.out.println(freqMap);
 
-        //add teeing()
+
+
+        System.out.println("\nUsing Collectors.teeing() to Average and Sum: ");
+        List<Integer> nums = IntStream.rangeClosed(1, 10).boxed().toList();
+
+        String result = nums.stream().collect(
+                Collectors.teeing(
+                        Collectors.averagingInt(Integer::intValue),
+                        Collectors.summingInt(Integer::intValue),
+                        (average, sum) -> String.format("Average: %.2f, Sum: %d", average, sum)
+                )
+        );
+
+        System.out.println(result);
+
+
+        System.out.println("\nUsing Collectors.teeing() to Filter and Count: ");
+        HashMap<String, Object> resultMap = employees.stream().collect(
+                Collectors.teeing(
+                        Collectors.filtering(e -> e.getSalary() > 200, Collectors.toList()),
+                        Collectors.filtering(e -> e.getSalary() > 200, Collectors.counting()),
+                        (list, count) -> {
+                            HashMap<String, Object> newMap = new HashMap();
+                            newMap.put("list", list);
+                            newMap.put("count", count);
+                            return newMap;
+                        }
+                ));
+
+        System.out.println(resultMap);
+
+
     }
 
 }
