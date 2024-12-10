@@ -190,7 +190,7 @@ public class Streams {
         System.out.println(resChar);
 
 
-        System.out.println("Return if any element in the in array is repeating or not");
+        System.out.println("Return if any element in the int array is repeating or not");
         int[] intArray = {1,5,8,9,5};
         System.out.println("method 1: ");
         List<Integer> intList = Arrays.stream(intArray).boxed().toList();
@@ -221,7 +221,7 @@ public class Streams {
 
         stream.forEach(System.out::println);
 
-        System.out.println("Check if list is empty in using Optional, if not null iterate through the list and print the object: ");
+        System.out.println("Check if list is empty using Optional, if not null iterate through the list and print the object: ");
         List<Integer> numList2 = List.of(1,6,4,9,0,9,1);
         Optional.of(numList2)
                 .orElseGet(Collections::emptyList) // creates empty immutable list: [] in case noteLst is null
