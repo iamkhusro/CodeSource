@@ -301,7 +301,7 @@ public class Streams {
 
 
         System.out.println("Find the second most repeated element: ");
-        List<Integer> integerList = List.of(1,6,7,1,2,8,2,4,2);
+        List<Integer> integerList = List.of(1,6,7,1,2,7,8,2,4,2,2,7);
         Map<Integer, Long> countMap = integerList.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
         List<Long> counts = countMap.values().stream().sorted(Collections.reverseOrder()).toList();
 
@@ -310,6 +310,12 @@ public class Streams {
             secondMaxCount = counts.get(1);
             System.out.println(countMap.entrySet().stream().filter(entry -> entry.getValue().equals(secondMaxCount)).map(entry -> entry.getKey()).findFirst().orElse(null));
         }
+
+        //in one stream
+        long secondMostRepeated = integerList.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
+                .entrySet().stream().sorted((e1,e2) -> (int)(e2.getValue() - e1.getValue())).skip(1).mapToLong(e -> e.getKey()).findFirst().orElse(-1);
+
+        System.out.println(secondMostRepeated);
 
 
         System.out.println("Partition a list into two having even and odd numbers: ");
