@@ -321,7 +321,7 @@ public class Streams {
 
         System.out.println("Partition a list into two having even and odd numbers: ");
         List<Integer> partInt = List.of(1,6,4,3,77,51,6,1);
-        Map<Boolean, List<Integer>> partIntMap = partInt.stream().collect(Collectors.partitioningBy(n -> n % 2== 0));
+        Map<Boolean, List<Integer>> partIntMap = partInt.stream().collect(Collectors.partitioningBy(n -> n % 2 == 0));
 
         System.out.println(partIntMap);
 
@@ -428,6 +428,23 @@ public class Streams {
         List<String> list3 = List.of("apple", "banana", "cherry");
         List<Character> charList = list3.stream().reduce((a,b) -> a + b).orElse("").chars().mapToObj(n -> (char)n).distinct().sorted().toList();
         System.out.println(charList);
+
+
+        System.out.println("\nGiven a list of strings, count how many strings start with a specific prefix: ");
+        List<String> list4 = List.of("apple", "apricot", "banana", "cherry", "ape");
+        String prefix = "ap";
+        System.out.println(list4.stream().filter(s -> s.contains(prefix)).count());
+
+
+        System.out.println("\nFind the maximum and minimum value from a list of integers using teeing(): ");
+        List<Integer> list5 = List.of(5, 10, 20, 1, 8);
+        String ans = list5.stream().collect(Collectors.teeing(
+                Collectors.maxBy(Integer::compareTo),
+                Collectors.minBy(Integer::compareTo),
+                (max,min) -> "Max: " + max.orElse(-1) + ", Min: " + min.orElse(-1)
+        ));
+        System.out.println(ans);
+
 
     }
 
