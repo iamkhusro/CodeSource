@@ -418,6 +418,17 @@ public class Streams {
         System.out.println(resultMap);
 
 
+        System.out.println("\nGiven a list of strings, group them by their length using a Map<Integer, List<String>>: ");
+        List<String> stringList = List.of("cat", "dog", "elephant", "bat", "lion");
+        Map<Integer, List<String>> groupList = stringList.stream().collect(Collectors.groupingBy(String::length));
+        System.out.println(groupList);
+
+
+        System.out.println("\nGiven a list of strings, return a sorted list of all distinct characters present in all the strings: ");
+        List<String> list3 = List.of("apple", "banana", "cherry");
+        List<Character> charList = list3.stream().reduce((a,b) -> a + b).orElse("").chars().mapToObj(n -> (char)n).distinct().sorted().toList();
+        System.out.println(charList);
+
     }
 
 }
