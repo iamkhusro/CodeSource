@@ -446,6 +446,15 @@ public class Streams {
         System.out.println(ans);
 
 
+        System.out.println("\nGiven multiple lists of integers, find the common elements that are present in all lists: ");
+        List<Integer> commList1 = List.of(7,3,1,8,32,51);
+        List<Integer> commList2 = List.of(9,1,4,8,51);
+        List<Integer> commList3 = List.of(3,10,1,8,51,100,34);
+
+        System.out.println(commList1.stream().filter(commList2::contains).filter(commList3::contains).toList());
+
+
+
     }
 
 }
