@@ -454,6 +454,9 @@ public class Streams {
         System.out.println(commList1.stream().filter(commList2::contains).filter(commList3::contains).toList());
 
 
+        System.out.println("\nFind Strings with Only Digits: ");
+        List<String> numStrList = List.of("123", "abc", "45", "hello", "6789");
+        System.out.println(numStrList.stream().filter(s -> s.matches("\\d+")).toList());
 
     }
 
