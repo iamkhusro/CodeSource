@@ -458,6 +458,21 @@ public class Streams {
         List<String> numStrList = List.of("123", "abc", "45", "hello", "6789");
         System.out.println(numStrList.stream().filter(s -> s.matches("\\d+")).toList());
 
+
+        System.out.println("\nGiven two lists of equal size, combine them into a map where one list provides keys and the other provides values: ");
+        List<String> keys = List.of("name", "age", "city");
+        List<String> values = List.of("Alice", "30", "New York");
+
+        Map<String,String> kV = IntStream.range(0, keys.size()).boxed().collect(Collectors.toMap(keys::get, values::get));
+        System.out.println(kV);
+
+        //Explanation:
+        //IntStream.range(0, keys.size()): Creates a stream of indices from 0 to keys.size() - 1.
+        //.boxed(): Converts the IntStream to a Stream<Integer> for easier collection.
+        //.collect(Collectors.toMap(keys::get, values::get)):
+        //Maps each index to its corresponding element in keys (key) and values (value) using keys::get and values::get.
+
+
     }
 
 }
