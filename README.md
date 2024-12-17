@@ -9,6 +9,7 @@ This repository contains solutions to various Java programming problems.
   - Data Structures and Algorithms
   - Object-Oriented Programming
   - Core Java concepts
+  - Streams
 - Some solutions are inspired by or directly adapted from platforms such as:
   - Code360
   - HackerRank
