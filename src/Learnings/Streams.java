@@ -388,7 +388,7 @@ public class Streams {
 
 
 
-        System.out.println("\nUsing Collectors.teeing() to Average and Sum: ");
+        System.out.println("\nUsing Collectors.teeing() to calculate Average and Sum: ");
         List<Integer> nums = IntStream.rangeClosed(1, 10).boxed().toList();
 
         String result = nums.stream().collect(
@@ -433,7 +433,7 @@ public class Streams {
         System.out.println("\nGiven a list of strings, count how many strings start with a specific prefix: ");
         List<String> list4 = List.of("apple", "apricot", "banana", "cherry", "ape");
         String prefix = "ap";
-        System.out.println(list4.stream().filter(s -> s.contains(prefix)).count());
+        System.out.println(list4.stream().filter(s -> s.startsWith(prefix)).count());
 
 
         System.out.println("\nFind the maximum and minimum value from a list of integers using teeing(): ");
