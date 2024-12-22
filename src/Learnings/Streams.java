@@ -178,7 +178,7 @@ public class Streams {
 
         String str = "Java stream testing";
         System.out.println("Find the first non repeating character in a string: ");
-        String res = str.chars().mapToObj(s -> Character.toString((char)s).toLowerCase()).collect(Collectors.groupingBy(Function.identity(), LinkedHashMap::new, Collectors.counting()))
+        Character res = str.chars().mapToObj(s -> (char)s).collect(Collectors.groupingBy(Function.identity(), LinkedHashMap::new, Collectors.counting()))
                 .entrySet().stream().filter(entry -> entry.getValue() == 1).map(entry -> entry.getKey()).findFirst().orElse(null);
 
         System.out.println(res);
