@@ -473,6 +473,13 @@ public class Streams {
         //Maps each index to its corresponding element in keys (key) and values (value) using keys::get and values::get.
 
 
+        System.out.println("\nGiven a List<Integer>, write a stream-based solution to find the second largest unique number. If the list does not have at least two unique numbers, return Optional.empty(): ");
+        List<Integer> intNumbers = Arrays.asList(5, 3, 9, 1, 3, 9, 7);
+        Optional<Integer> optional = intNumbers.stream().filter(n -> Collections.frequency(intNumbers, n) == 1).
+                sorted(Comparator.comparingInt(Integer::intValue).reversed()).skip(1).findFirst();
+        System.out.println(optional.isPresent() ? optional.get() : optional);
+
+
     }
 
 }
