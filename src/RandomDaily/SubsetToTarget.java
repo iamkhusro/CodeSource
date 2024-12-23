@@ -1,8 +1,7 @@
 package RandomDaily;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 //problem asked in VISA interview
 public class SubsetToTarget {
@@ -24,11 +23,21 @@ public class SubsetToTarget {
     }
 
     private static boolean isSatisfied(List<Integer> list, int threshold) {
-        Integer max = list.stream().max(Comparator.comparingInt(Integer::intValue)).orElse(null);
-        Integer min = list.stream().min(Comparator.comparingInt(Integer::intValue)).orElse(null);
+        Map<String,Integer> map = list.stream().collect(Collectors.teeing(
+                        Collectors.maxBy(Integer::compare),
+                        Collectors.minBy(Integer::compare),
+                        (max, min) -> {
+                            Map<String,Integer> res = new HashMap<>();
+                            res.put("max", max.orElse(null));
+                            res.put("min", min.orElse(null));
+                            return res;
+                        }
+                )
+        );
 
+        Integer max = map.get("max");
+        Integer min = map.get("min");
         if (max != null && min != null) {
-//            System.out.println(list);
             return (max - min) <= threshold;
         }
         return false;
