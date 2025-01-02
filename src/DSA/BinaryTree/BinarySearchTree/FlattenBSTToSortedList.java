@@ -38,7 +38,7 @@ public class FlattenBSTToSortedList
         // Write your code here
         List<Integer> sortedNodesData = new ArrayList<>();
         inOrderTraverse(root, sortedNodesData);
-        // System.out.println(sortedNodes)
+//         System.out.println(sortedNodesData);
 
         TreeNode<Integer> newRoot = null;
         TreeNode<Integer> temp = null;
