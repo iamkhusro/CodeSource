@@ -1,4 +1,4 @@
-package RandomDaily;
+package DSA.Queue;
 
 //Alice has completed various courses on coding ninja, and now she is confident for her coding interviews.
 // She plans to do internships in the summer and has prepared a list of ‘N’ companies.
