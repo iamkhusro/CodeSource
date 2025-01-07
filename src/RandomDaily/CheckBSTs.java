@@ -12,7 +12,10 @@ The structure of the two given BSTs can be different.
 Note: All elements in a given BST are unique.
 */
 
-//NB: Only inorder traversal didn't give solution as the elements were in random order. Reason why had to sort the elements, using TreeSet, for comparison
+/*NB: Only inorder traversal didn't give solution as the elements were in random order. The tree contains duplicate elements as well.
+Reason why had to sort and filter the elements, using TreeSet, for comparison
+*/
+
 
 public class CheckBSTs {
 
