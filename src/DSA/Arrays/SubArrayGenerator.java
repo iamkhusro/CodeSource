@@ -4,7 +4,7 @@ import java.util.*;
 
 public class SubArrayGenerator {
     public static void main(String[] args) {
-        int[] arr = {1, 2, 3, 2};
+        int[] arr = {1, 2, 3, 1};
         Set<List<Integer>> subs = new HashSet<>();
         subs.add(new ArrayList<>()); // Start with an empty subset
 
@@ -13,7 +13,7 @@ public class SubArrayGenerator {
             for (List<Integer> subset : subs) {
                 List<Integer> newSubset = new ArrayList<>(subset);
                 newSubset.add(num);
-                Collections.sort(newSubset); // Ensure subsets are always ordered
+                newSubset.sort(Comparator.naturalOrder());// Ensure subsets are always ordered
                 newSubsets.add(newSubset);
             }
             subs.addAll(newSubsets);
