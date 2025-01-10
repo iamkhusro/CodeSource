@@ -2,12 +2,12 @@ package DSA.Queue;
 
 import java.util.ArrayDeque;
 
-public class Deque
+public class DEQue
 {
     // Initialize your data structure.
     public java.util.Deque<Integer> deque;
     public int size;
-    public Deque(int n)
+    public DEQue(int n)
     {
         // Write your code here.
         deque = new ArrayDeque<>();
