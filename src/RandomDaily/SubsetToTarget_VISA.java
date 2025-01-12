@@ -4,7 +4,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 //problem asked in VISA interview
-public class SubsetToTarget {
+public class SubsetToTarget_VISA {
     private static int getSolution(int[] arr, int threshold) {
         List<Integer> maximum = new ArrayList<>();
         int length = arr.length;
