@@ -171,7 +171,8 @@ public class Streams {
         System.out.println("Uses of peek(): ");
         numList.stream().peek(n -> System.out.println("Peek: " + n)).filter(n -> n % 2 == 0).forEach(System.out::println);
 
-        //peek is an intermediate operation and can be used to perform operation or debug and check data one by one in between pipelines without making changes to data and then continue with other operations.
+        //peek is an intermediate operation and can be used to perform operation or debug
+        //and check data one by one in between pipelines without making changes to data and then continue with other operations
         //check outputs to clear
 
 
@@ -205,7 +206,8 @@ public class Streams {
 
         System.out.println("Find only duplicate elements with count");
         List<Integer> numList1 = List.of(1,6,4,9,0,9,1);
-        Map<Integer, Long> intMap = numList1.stream().filter(n -> Collections.frequency(numList1, n) > 1).collect(Collectors.groupingBy(Function.identity(), LinkedHashMap::new, Collectors.counting()));
+        Map<Integer, Long> intMap = numList1.stream().filter(n -> Collections.frequency(numList1, n) > 1)
+                .collect(Collectors.groupingBy(Function.identity(), LinkedHashMap::new, Collectors.counting()));
         System.out.println(intMap);
 
         System.out.println("Provide count of each element: ");
@@ -225,11 +227,19 @@ public class Streams {
         System.out.println("Check if list is empty using Optional, if not null iterate through the list and print the object: ");
         List<Integer> numList2 = List.of(1,6,4,9,0,9,1);
         Optional.of(numList2)
-                .orElseGet(Collections::emptyList) // creates empty immutable list: [] in case noteLst is null
+                .orElseGet(Collections::emptyList) // creates empty immutable list: [] in case numList2 is null
                 .stream().filter(Objects::nonNull) //loop through each object and consider not null objects
                 .forEach(System.out::println);
 
-        System.out.println("Print sum of elements using reduce: ");
+        System.out.println("\nSkipping null values: ");
+        List<Integer> numList3 = Arrays.asList(1,5,8,3,5,12,13,14,null); //cant put null values when using List.of(), so using Arrays.asList()
+        numList3.stream().filter(Objects::nonNull).forEach(System.out::println);
+
+        System.out.println("\nSkip null values and print even: ");
+        numList3.stream().filter(n -> Objects.nonNull(n) && n % 2 == 0).forEach(System.out::println);
+
+
+        System.out.println("\nPrint sum of elements using reduce: ");
         System.out.println(numList.stream().reduce(0, (c,e) -> c + e));
 
 
