@@ -21,8 +21,10 @@ public class LeftViewOfBT {
                     System.out.print(current.data + " ");
                 }
 
-                if (current.left != null) queue.offer(current.left);
-                if (current.right != null) queue.offer(current.right);
+                if (current.left != null)
+                    queue.offer(current.left);
+                if (current.right != null)
+                    queue.offer(current.right);
             }
         }
     }

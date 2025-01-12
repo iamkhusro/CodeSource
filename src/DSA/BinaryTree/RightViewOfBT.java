@@ -13,17 +13,18 @@ public class RightViewOfBT {
 
         while (!queue.isEmpty()) {
             int size = queue.size();
-            TreeNode rightMost = null;
 
             for (int i = 0; i < size; i++) {
                 TreeNode current = queue.poll();
-                rightMost = current;
 
-                if (current.left != null) queue.offer(current.left);
-                if (current.right != null) queue.offer(current.right);
+                if (i == size - 1)
+                    System.out.print(current.data + " ");
+
+                if (current.left != null)
+                    queue.offer(current.left);
+                if (current.right != null)
+                    queue.offer(current.right);
             }
-            // Print the rightmost node of the current level
-            System.out.print(rightMost.data + " ");
         }
     }
 

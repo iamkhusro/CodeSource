@@ -16,9 +16,13 @@ public class LevelOrderTraversal {
                 TreeNode current = queue.poll();
                 System.out.print(current.data + " ");
 
-                if (current.left != null) queue.offer(current.left);
-                if (current.right != null) queue.offer(current.right);
+                if (current.left != null)
+                    queue.offer(current.left);
+                if (current.right != null)
+                    queue.offer(current.right);
             }
+            //for printing level wise
+            System.out.println();
         }
     }
 
