@@ -339,8 +339,9 @@ public class Streams {
         System.out.println("Get summary of the list of Integers: ");
         IntSummaryStatistics intSummaryStatistics = partInt.stream().collect(Collectors.summarizingInt(Integer::intValue));
 
-        System.out.println(intSummaryStatistics.toString());
+        System.out.println(intSummaryStatistics);
         System.out.println(intSummaryStatistics.getAverage());
+        System.out.println(intSummaryStatistics.getMax());
 
         System.out.println("Use collectors mapping: ");
         System.out.println(partInt.stream().collect(Collectors.mapping(n -> n * 2, Collectors.toList())));
@@ -485,8 +486,8 @@ public class Streams {
 
         System.out.println("\nGiven a List<Integer>, write a stream-based solution to find the second largest unique number. If the list does not have at least two unique numbers, return Optional.empty(): ");
         List<Integer> intNumbers = Arrays.asList(5, 3, 9, 1, 3, 9, 7);
-        Optional<Integer> optional = intNumbers.stream().filter(n -> Collections.frequency(intNumbers, n) == 1).
-                sorted(Comparator.comparingInt(Integer::intValue).reversed()).skip(1).findFirst();
+        Optional<Integer> optional = intNumbers.stream().filter(n -> Collections.frequency(intNumbers, n) == 1)
+                .sorted(Comparator.reverseOrder()).skip(1).findFirst();
         System.out.println(optional.isPresent() ? optional.get() : optional);
 
 
