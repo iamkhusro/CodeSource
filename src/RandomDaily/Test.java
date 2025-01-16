@@ -1,10 +1,16 @@
 package RandomDaily;
 
-import java.util.Arrays;
-import java.util.*;
-
 public class Test {
+    public static boolean isPalindrome(String s) {
+        String filtered = s.chars().mapToObj(n -> (char)n)
+                .filter(Character::isLetterOrDigit).map(c -> (""+c).toLowerCase()).reduce((a,b) -> a + b).orElse("");
+
+        StringBuilder sb = new StringBuilder(filtered);
+
+        return sb.reverse().toString().equals(filtered);
+    }
+
     public static void main(String[] args) {
-        Map<Integer,Integer> map = new HashMap<>();
+        System.out.println(isPalindrome(" "));
     }
 }
