@@ -242,6 +242,16 @@ public class Streams {
         System.out.println("\nPrint sum of elements using reduce: ");
         System.out.println(numList.stream().reduce(0, (c,e) -> c + e));
 
+        System.out.println("\nGiven a list of integers, write a Java program using Streams to:\n" +
+                "\n" +
+                "Find all numbers that are divisible by 3 and 5.\n" +
+                "Square those numbers.\n" +
+                "Find the maximum value among the squared numbers.");
+
+        List<Integer> numberList = Arrays.asList(15, 30, 22, 45, 60, 18, 75);
+        System.out.println(numberList.stream().filter(n -> n % 3 == 0 && n % 5 == 0)
+                .map(n -> n * n).mapToInt(Integer::intValue).max().orElse(-1));
+
 
 
         int[] arr = new int[]{1,5,34,87};
