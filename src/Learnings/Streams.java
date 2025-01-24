@@ -501,6 +501,11 @@ public class Streams {
         System.out.println(optional.isPresent() ? optional.get() : optional);
 
 
+        System.out.println("Check whether a string is Pangram or not. (A word or a sentence is called a pangram if it contains all the English alphabet letters.): ");
+        String pangram = "TheQuickBrownFoxJumpsOverTheLazyDog";
+        Set<Character> allChars = pangram.toLowerCase().chars()
+                .mapToObj(n -> (char)n).collect(Collectors.toSet());
+        System.out.println(allChars.size() == 26);
     }
 
 }
