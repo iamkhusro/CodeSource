@@ -506,6 +506,12 @@ public class Streams {
         Set<Character> allChars = pangram.toLowerCase().chars()
                 .mapToObj(n -> (char)n).collect(Collectors.toSet());
         System.out.println(allChars.size() == 26);
+
+        System.out.println("Show employees department wise with highest salary: ");
+        Map<String, Optional<Employee>> empMap = employees.stream().collect(Collectors.groupingBy(Employee::getDepartment, Collectors.maxBy(Comparator.comparingDouble(Employee::getSalary))));
+        for (String dep : empMap.keySet()) {
+            System.out.println("Department: " + dep + ", Name: " + empMap.get(dep).orElse(new Employee()).getName());
+        }
     }
 
 }
