@@ -507,11 +507,15 @@ public class Streams {
                 .mapToObj(n -> (char)n).collect(Collectors.toSet());
         System.out.println(allChars.size() == 26);
 
-        System.out.println("Show employees department wise with highest salary: ");
+        System.out.println("\nShow employees department wise with highest salary: ");
         Map<String, Optional<Employee>> empMap = employees.stream().collect(Collectors.groupingBy(Employee::getDepartment, Collectors.maxBy(Comparator.comparingDouble(Employee::getSalary))));
         for (String dep : empMap.keySet()) {
             System.out.println("Department: " + dep + ", Name: " + empMap.get(dep).orElse(new Employee()).getName());
         }
+
+        System.out.println("\nFind the longest string: ");
+        List<String> strings = List.of("cat", "elephant", "tiger", "hippopotamus");
+        System.out.println(strings.stream().max(Comparator.comparingInt(String::length)).orElse(""));
     }
 
 }
